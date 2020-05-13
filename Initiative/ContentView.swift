@@ -9,34 +9,51 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection = 0
+    @State private var selection = 1
  
     var body: some View {
         TabView(selection: $selection){
-            Text("First View")
-                .font(.title)
-                .tabItem {
-                    VStack {
-                        Image("first")
-                        Text("First")
-                    }
-                }
-                .tag(0)
             Text("Second View")
-                .font(.title)
+            .tabItem {
+                VStack {
+                    Image(systemName: "person.3.fill")
+                    Text("Parties")
+                    .tracking(-0.25)
+                    .tabViewLabelStyle()
+                }
+            }
+            .tag(0)
+            InitiativeView()
                 .tabItem {
                     VStack {
-                        Image("second")
-                        Text("Second")
+                        Image(systemName: "hexagon.fill")
+                        Text("Initiative")
+                            .tracking(-0.25)
+                            .tabViewLabelStyle()
+                            
                     }
                 }
                 .tag(1)
+            AddCreatureView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "shield.fill")
+                        Text("Encounters")
+                        .tracking(-0.25)
+                        .tabViewLabelStyle()
+                    }
+                }
+                .tag(2)
         }
+//        .tabViewLabelStyle()
     }
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return ContentView().environment(\.managedObjectContext, context)
     }
 }
+#endif
