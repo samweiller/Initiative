@@ -31,3 +31,16 @@ extension Notification {
         return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
     }
 }
+
+func getColorFromType(type: String) -> String {
+    switch type {
+    case "Party":
+        return "CorePurple"
+    case "Enemy":
+        return "CoreCoral"
+    case "Ally":
+        return "CoreTeal"
+    default:
+        return "Text Primary"
+    }
+}

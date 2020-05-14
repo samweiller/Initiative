@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Creature" representedClassName="Creature" syncable="YES" codeGenerationType="class">
-        <attribute name="currentHP" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="initiative" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentHP" optional="YES" attributeType="String"/>
+        <attribute name="initiative" optional="YES" attributeType="String"/>
+        <attribute name="maxHP" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="totalHP" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="creatureGroups" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CreatureGroup" inverseName="creatures" inverseEntity="CreatureGroup"/>
         <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="creatures" inverseEntity="Encounter"/>

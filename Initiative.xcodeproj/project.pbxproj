@@ -28,6 +28,8 @@
 		C5934FB4246C80BF00F58A8F /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5934FAE246C80BF00F58A8F /* CircularStd-Medium.otf */; };
 		C5934FB8246CAF4700F58A8F /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FB7246CAF4700F58A8F /* GeneralHelpers.swift */; };
 		C5934FBA246CC4FD00F58A8F /* CreatureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */; };
+		C5934FBC246CEDA800F58A8F /* Hexagon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FBB246CEDA800F58A8F /* Hexagon.swift */; };
+		C5934FBE246CEDE300F58A8F /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		C5934FAE246C80BF00F58A8F /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
 		C5934FB7246CAF4700F58A8F /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
 		C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatureCard.swift; sourceTree = "<group>"; };
+		C5934FBB246CEDA800F58A8F /* Hexagon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hexagon.swift; sourceTree = "<group>"; };
+		C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,8 @@
 			children = (
 				C5934FA4246B96CB00F58A8F /* TypePicker.swift */,
 				C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */,
+				C5934FBB246CEDA800F58A8F /* Hexagon.swift */,
+				C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -336,7 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5934FBE246CEDE300F58A8F /* HexagonParameters.swift in Sources */,
 				C55C4A7F246B117100F2E121 /* AppDelegate.swift in Sources */,
+				C5934FBC246CEDA800F58A8F /* Hexagon.swift in Sources */,
 				C55C4AB4246B4B6300F2E121 /* Initiative.xcdatamodel in Sources */,
 				C5934FA5246B96CB00F58A8F /* TypePicker.swift in Sources */,
 				C5934FB8246CAF4700F58A8F /* GeneralHelpers.swift in Sources */,

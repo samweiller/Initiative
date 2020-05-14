@@ -34,7 +34,8 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-            AddCreatureView()
+//            AddCreatureView()
+                Text("Encounter")
                 .tabItem {
                     VStack {
                         Image(systemName: "shield.fill")

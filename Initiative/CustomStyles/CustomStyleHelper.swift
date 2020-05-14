@@ -9,21 +9,31 @@
 import Foundation
 import SwiftUI
 
+// General Styles
 struct ViewTitle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("CircularStd-Bold", size: 34))
-            .foregroundColor(Color("Dark Text Primary"))
+            .foregroundColor(Color("Text Primary"))
             .padding()
             .background(Color("MainBackground"))
     }
 }
 
+struct TabViewLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Book", size: 11))
+            .foregroundColor(Color("Text Primary"))
+    }
+}
+
+// Form Styles
 struct FormLabel: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("CircularStd-Bold", size: 16))
-            .foregroundColor(Color("Dark Text Primary"))
+            .foregroundColor(Color("Text Primary"))
             .padding(.bottom, 2)
     }
 }
@@ -32,15 +42,7 @@ struct FormContent: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("CircularStd-Book", size: 14))
-            .foregroundColor(Color("Dark Text Primary"))
-    }
-}
-
-struct TabViewLabel: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.custom("CircularStd-Book", size: 11))
-            .foregroundColor(Color("Dark Text Primary"))
+            .foregroundColor(Color("Text Primary"))
     }
 }
 
@@ -62,6 +64,56 @@ struct FormTextFieldStyle: TextFieldStyle {
             .background(Color("Text Field Background"))
             .cornerRadius(8)
             .disableAutocorrection(true)
+    }
+}
+
+// Card Styles
+struct CardInitValueStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Medium", size: 30))
+//            .foregroundColor(Color("Text Primary"))
+    }
+}
+
+struct CardNameStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Medium", size: 18))
+            .foregroundColor(Color("Text Primary"))
+    }
+}
+
+struct CardTypeStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Book", size: 16))
+            .foregroundColor(Color("Medium Emphasis Text"))
+    }
+}
+
+struct CardCurrentHPStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Book", size: 30))
+            .foregroundColor(Color("Text Primary"))
+    }
+}
+
+struct CardMaxHPStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Book", size: 12))
+            .foregroundColor(Color("Medium Emphasis Text"))
+    }
+}
+
+
+struct CardHPLabelStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Book", size: 11))
+            .foregroundColor(Color("Text Primary"))
     }
 }
 
@@ -103,7 +155,41 @@ extension View {
     }
 }
 
+extension View {
+    func cardInitValueStyle() -> some View {
+        self.modifier(CardInitValueStyle())
+    }
+}
 
+extension View {
+    func cardNameStyle() -> some View {
+        self.modifier(CardNameStyle())
+    }
+}
+
+extension View {
+    func cardTypeStyle() -> some View {
+        self.modifier(CardTypeStyle())
+    }
+}
+
+extension View {
+    func cardCurrentHPStyle() -> some View {
+        self.modifier(CardCurrentHPStyle())
+    }
+}
+
+extension View {
+    func cardMaxHPStyle() -> some View {
+        self.modifier(CardMaxHPStyle())
+    }
+}
+
+extension View {
+    func cardHPLabelStyle() -> some View {
+        self.modifier(CardHPLabelStyle())
+    }
+}
 
 struct CustomStyleHelper_Previews: PreviewProvider {
     static var previews: some View {

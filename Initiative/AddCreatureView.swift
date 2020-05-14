@@ -11,13 +11,16 @@ import Combine
 
 struct AddCreatureView: View {
     @State var name: String = ""
-    @State var maxHP: String = "" 
+    @State var maxHP: String = ""
     @State var currentHP: String = ""
     @State var initiativeValue: String = ""
     @State var creatureGroup: String = ""
     
     @State var creatureType: String = ""
+    
     @State private var keyboardHeight: CGFloat = 0
+    
+    @Binding var showModal: Bool
     
     @Environment(\.managedObjectContext) var moc
     
@@ -26,8 +29,19 @@ struct AddCreatureView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Add Creature")
-                    .viewTitleStyle()
+                HStack {
+                    Text("Add Creature")
+                        .viewTitleStyle()
+                    Spacer()
+                    Button(action: {
+                        self.showModal = false
+                    }) {
+                    Text("Cancel")
+                        .foregroundColor(Color("CorePurple"))
+                        .padding(.trailing)
+                    }
+                }
+                
 //                ScrollView {
                 VStack {
                     VStack(alignment: .leading, spacing: formSpacing) {
@@ -38,7 +52,7 @@ struct AddCreatureView: View {
                     
                     VStack(alignment: .leading, spacing: formSpacing) {
                         Text("Type").formLabelStyle()
-                        TypePicker().padding([.bottom])
+                        TypePicker(selectedType: $creatureType).padding([.bottom])
                     }.padding([.horizontal])
                     
                     HStack {
@@ -73,26 +87,26 @@ struct AddCreatureView: View {
                         }.padding([.horizontal])
                     }
                     HStack {
-                        Button(action: {
-                            print("button")
-                        }) {
-                            Text("Cancel")
-                                .fontWeight(.bold)
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .padding(.all, 11)
-                                .cornerRadius(8)
-                                .foregroundColor(.gray)
-                            
-                        }.padding([.horizontal])
+//                        Button(action: {
+//                           self.showModal = false
+//                        }) {
+//                            Text("Cancel")
+//                                .fontWeight(.bold)
+//                                .frame(minWidth: 0, maxWidth: .infinity)
+//                                .padding(.all, 11)
+//                                .cornerRadius(8)
+//                                .foregroundColor(.gray)
+//
+//                        }.padding([.horizontal])
                         Button(action: {
                             let creature = Creature(context: self.moc)
-                            creature.type = "Party"
+                            creature.type = self.creatureType
                             creature.name = self.name
-                            creature.totalHP = Int16(self.maxHP)!
-                            creature.currentHP = Int16(self.currentHP)!
-                            creature.initiative = Int16(self.initiativeValue)!
+                            creature.maxHP = self.maxHP
+                            creature.currentHP = self.currentHP
+                            creature.initiative = self.initiativeValue
                             try? self.moc.save()
-
+                            self.showModal = false
                         }) {
                             Text("Save")
                                 .fontWeight(.bold)
@@ -116,6 +130,6 @@ struct AddCreatureView: View {
 
 struct AddCreatureView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCreatureView()
+        AddCreatureView(showModal: .constant(true))
     }
 }
