@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TypePicker: View {
-    @State var selectedType: String = ""
+    @Binding var selectedType: String
     
     var body: some View {
         HStack {
@@ -59,23 +59,9 @@ func setCurrentValue(value: String) {
 
 struct SegmentedPicker_Previews: PreviewProvider {
     static var previews: some View {
-        TypePicker()
+//        TypePicker(selectedType: "Enemy")
+        Text("Hello")
     }
 }
 
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
-    }
-}
 
-struct RoundedCorner: Shape {
-    
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-    
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}

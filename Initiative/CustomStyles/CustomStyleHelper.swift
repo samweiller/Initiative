@@ -108,12 +108,21 @@ struct CardMaxHPStyle: ViewModifier {
     }
 }
 
-
 struct CardHPLabelStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("CircularStd-Book", size: 11))
             .foregroundColor(Color("Text Primary"))
+    }
+}
+
+struct ActionIconStyle: ViewModifier {
+    let font = Font.system(size: 22).weight(.semibold)
+    func body(content: Content) -> some View {
+        content
+            .font(font)
+            .foregroundColor(Color("Medium Emphasis Text"))
+            .frame(width: 24, height: 24)
     }
 }
 
@@ -188,6 +197,12 @@ extension View {
 extension View {
     func cardHPLabelStyle() -> some View {
         self.modifier(CardHPLabelStyle())
+    }
+}
+
+extension View {
+    func actionIconStyle() -> some View {
+        self.modifier(ActionIconStyle())
     }
 }
 
