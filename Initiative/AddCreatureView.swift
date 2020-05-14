@@ -11,8 +11,15 @@ import Combine
 
 struct AddCreatureView: View {
     @State var name: String = ""
+    @State var maxHP: String = "" 
+    @State var currentHP: String = ""
+    @State var initiativeValue: String = ""
+    @State var creatureGroup: String = ""
+    
     @State var creatureType: String = ""
     @State private var keyboardHeight: CGFloat = 0
+    
+    @Environment(\.managedObjectContext) var moc
     
     var formSpacing: CGFloat = 5.0
     
@@ -37,24 +44,32 @@ struct AddCreatureView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: formSpacing) {
                             Text("Max HP").formLabelStyle()
-                            TextField("", text: $name).textFieldStyle(FormTextFieldStyle())
+                            TextField("", text: $maxHP, onEditingChanged: {_ in
+                                if (self.currentHP == "") {
+                                    self.currentHP = self.maxHP
+                                }
+                            }
+                            ).textFieldStyle(FormTextFieldStyle())
+                                .keyboardType(/*@START_MENU_TOKEN@*/.numberPad/*@END_MENU_TOKEN@*/)
                         }.padding([.horizontal])
                         
                         VStack(alignment: .leading, spacing: formSpacing) {
                             Text("Current HP").formLabelStyle()
-                            TextField("", text: $name).textFieldStyle(FormTextFieldStyle())
+                            TextField("", text: $currentHP).textFieldStyle(FormTextFieldStyle())
+                            .keyboardType(/*@START_MENU_TOKEN@*/.numberPad/*@END_MENU_TOKEN@*/)
                         }.padding([.horizontal])
                     }
                     
                     HStack {
                         VStack(alignment: .leading, spacing: formSpacing) {
                             Text("Initiative").formLabelStyle()
-                            TextField("", text: $name).textFieldStyle(FormTextFieldStyle())
+                            TextField("", text: $initiativeValue).textFieldStyle(FormTextFieldStyle())
+                            .keyboardType(/*@START_MENU_TOKEN@*/.numberPad/*@END_MENU_TOKEN@*/)
                         }.padding([.horizontal])
                         
                         VStack(alignment: .leading, spacing: formSpacing) {
                             Text("Group").formLabelStyle()
-                            TextField("", text: $name).textFieldStyle(FormTextFieldStyle())
+                            TextField("", text: $creatureGroup).textFieldStyle(FormTextFieldStyle())
                         }.padding([.horizontal])
                     }
                     HStack {
@@ -70,7 +85,14 @@ struct AddCreatureView: View {
                             
                         }.padding([.horizontal])
                         Button(action: {
-                            print("button")
+                            let creature = Creature(context: self.moc)
+                            creature.type = "Party"
+                            creature.name = self.name
+                            creature.totalHP = Int16(self.maxHP)!
+                            creature.currentHP = Int16(self.currentHP)!
+                            creature.initiative = Int16(self.initiativeValue)!
+                            try? self.moc.save()
+
                         }) {
                             Text("Save")
                                 .fontWeight(.bold)

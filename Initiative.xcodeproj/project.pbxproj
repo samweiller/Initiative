@@ -27,6 +27,7 @@
 		C5934FB3246C80BF00F58A8F /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5934FAD246C80BF00F58A8F /* CircularStd-Book.otf */; };
 		C5934FB4246C80BF00F58A8F /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5934FAE246C80BF00F58A8F /* CircularStd-Medium.otf */; };
 		C5934FB8246CAF4700F58A8F /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FB7246CAF4700F58A8F /* GeneralHelpers.swift */; };
+		C5934FBA246CC4FD00F58A8F /* CreatureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		C5934FAD246C80BF00F58A8F /* CircularStd-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Book.otf"; sourceTree = "<group>"; };
 		C5934FAE246C80BF00F58A8F /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
 		C5934FB7246CAF4700F58A8F /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
+		C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatureCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				C5934FA4246B96CB00F58A8F /* TypePicker.swift */,
+				C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				C55C4A86246B117100F2E121 /* ContentView.swift in Sources */,
 				C55C4A81246B117100F2E121 /* SceneDelegate.swift in Sources */,
 				C55C4AB2246B125800F2E121 /* InitiativeView.swift in Sources */,
+				C5934FBA246CC4FD00F58A8F /* CreatureCard.swift in Sources */,
 				C55C4AB6246B4F0100F2E121 /* AddCreatureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
