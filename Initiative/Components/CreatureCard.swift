@@ -54,7 +54,6 @@ struct CreatureCard: View {
                 Button(action: {print("attack")}) {
                     Image(systemName: "burst")
                         .actionIconStyle()
-                    .frame(width: 32, height: 32)
                 }.padding([.horizontal])
             }
         .buttonStyle(PlainButtonStyle())

@@ -49,6 +49,7 @@ struct InitiativeView: View {
                         CreatureCard(creature: creature)
                     }
                 }
+                
             }
         }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))
     }

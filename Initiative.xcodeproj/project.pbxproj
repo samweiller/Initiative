@@ -30,6 +30,8 @@
 		C5934FBA246CC4FD00F58A8F /* CreatureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */; };
 		C5934FBC246CEDA800F58A8F /* Hexagon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FBB246CEDA800F58A8F /* Hexagon.swift */; };
 		C5934FBE246CEDE300F58A8F /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */; };
+		C5BE1F30246F282900021190 /* PopupAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE1F2F246F282900021190 /* PopupAlert.swift */; };
+		C5BE1F32246F288A00021190 /* AutoFocusTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE1F31246F288A00021190 /* AutoFocusTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatureCard.swift; sourceTree = "<group>"; };
 		C5934FBB246CEDA800F58A8F /* Hexagon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hexagon.swift; sourceTree = "<group>"; };
 		C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
+		C5BE1F2F246F282900021190 /* PopupAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAlert.swift; sourceTree = "<group>"; };
+		C5BE1F31246F288A00021190 /* AutoFocusTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFocusTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,8 @@
 				C5934FB9246CC4FD00F58A8F /* CreatureCard.swift */,
 				C5934FBB246CEDA800F58A8F /* Hexagon.swift */,
 				C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */,
+				C5BE1F2F246F282900021190 /* PopupAlert.swift */,
+				C5BE1F31246F288A00021190 /* AutoFocusTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5934FBE246CEDE300F58A8F /* HexagonParameters.swift in Sources */,
+				C5BE1F32246F288A00021190 /* AutoFocusTextField.swift in Sources */,
 				C55C4A7F246B117100F2E121 /* AppDelegate.swift in Sources */,
 				C5934FBC246CEDA800F58A8F /* Hexagon.swift in Sources */,
 				C55C4AB4246B4B6300F2E121 /* Initiative.xcdatamodel in Sources */,
@@ -353,6 +360,7 @@
 				C55C4A81246B117100F2E121 /* SceneDelegate.swift in Sources */,
 				C55C4AB2246B125800F2E121 /* InitiativeView.swift in Sources */,
 				C5934FBA246CC4FD00F58A8F /* CreatureCard.swift in Sources */,
+				C5BE1F30246F282900021190 /* PopupAlert.swift in Sources */,
 				C55C4AB6246B4F0100F2E121 /* AddCreatureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

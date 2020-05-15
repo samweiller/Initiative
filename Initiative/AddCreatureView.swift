@@ -47,6 +47,7 @@ struct AddCreatureView: View {
                     VStack(alignment: .leading, spacing: formSpacing) {
                         Text("Name").formLabelStyle()
                         TextField("", text: $name)
+//                        AutoFocusTextField(text: $name)
                             .textFieldStyle(FormTextFieldStyle())
                     }.padding([.horizontal])
                     
