@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5137424246F3514004150C9 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C5137423246F3514004150C9 /* Introspect */; settings = {ATTRIBUTES = (Required, ); }; };
 		C55C4A7F246B117100F2E121 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55C4A7E246B117100F2E121 /* AppDelegate.swift */; };
 		C55C4A81246B117100F2E121 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55C4A80246B117100F2E121 /* SceneDelegate.swift */; };
 		C55C4A86246B117100F2E121 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55C4A85246B117100F2E121 /* ContentView.swift */; };
@@ -31,7 +32,6 @@
 		C5934FBC246CEDA800F58A8F /* Hexagon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FBB246CEDA800F58A8F /* Hexagon.swift */; };
 		C5934FBE246CEDE300F58A8F /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */; };
 		C5BE1F30246F282900021190 /* PopupAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE1F2F246F282900021190 /* PopupAlert.swift */; };
-		C5BE1F32246F288A00021190 /* AutoFocusTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE1F31246F288A00021190 /* AutoFocusTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +82,6 @@
 		C5934FBB246CEDA800F58A8F /* Hexagon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hexagon.swift; sourceTree = "<group>"; };
 		C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
 		C5BE1F2F246F282900021190 /* PopupAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAlert.swift; sourceTree = "<group>"; };
-		C5BE1F31246F288A00021190 /* AutoFocusTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFocusTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5137424246F3514004150C9 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +206,6 @@
 				C5934FBB246CEDA800F58A8F /* Hexagon.swift */,
 				C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */,
 				C5BE1F2F246F282900021190 /* PopupAlert.swift */,
-				C5BE1F31246F288A00021190 /* AutoFocusTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -227,6 +226,9 @@
 			dependencies = (
 			);
 			name = Initiative;
+			packageProductDependencies = (
+				C5137423246F3514004150C9 /* Introspect */,
+			);
 			productName = Initiative;
 			productReference = C55C4A7B246B117100F2E121 /* Initiative.app */;
 			productType = "com.apple.product-type.application";
@@ -299,6 +301,9 @@
 				Base,
 			);
 			mainGroup = C55C4A72246B117100F2E121;
+			packageReferences = (
+				C5137422246F3514004150C9 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+			);
 			productRefGroup = C55C4A7C246B117100F2E121 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -349,7 +354,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5934FBE246CEDE300F58A8F /* HexagonParameters.swift in Sources */,
-				C5BE1F32246F288A00021190 /* AutoFocusTextField.swift in Sources */,
 				C55C4A7F246B117100F2E121 /* AppDelegate.swift in Sources */,
 				C5934FBC246CEDA800F58A8F /* Hexagon.swift in Sources */,
 				C55C4AB4246B4B6300F2E121 /* Initiative.xcdatamodel in Sources */,
@@ -686,6 +690,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C5137422246F3514004150C9 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/timbersoftware/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C5137423246F3514004150C9 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C5137422246F3514004150C9 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C55C4A73246B117100F2E121 /* Project object */;
 }

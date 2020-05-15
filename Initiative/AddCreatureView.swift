@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import Introspect
 
 struct AddCreatureView: View {
     @State var name: String = ""
@@ -47,8 +48,12 @@ struct AddCreatureView: View {
                     VStack(alignment: .leading, spacing: formSpacing) {
                         Text("Name").formLabelStyle()
                         TextField("", text: $name)
+                            .introspectTextField { textField in
+                               textField.becomeFirstResponder()
+                            }
 //                        AutoFocusTextField(text: $name)
                             .textFieldStyle(FormTextFieldStyle())
+                        
                     }.padding([.horizontal])
                     
                     VStack(alignment: .leading, spacing: formSpacing) {
