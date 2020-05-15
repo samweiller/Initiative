@@ -28,6 +28,20 @@ struct TabViewLabel: ViewModifier {
     }
 }
 
+struct SaveButtonStyle: ViewModifier {
+    var type: String
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Bold", size: 16))
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding(.all, 11)
+            .background(Color(getColorFromType(type: type)))
+            .cornerRadius(8)
+            .foregroundColor(type == "Cancel" ? .gray : .white)
+    }
+}
+
 // Form Styles
 struct FormLabel: ViewModifier {
     func body(content: Content) -> some View {
@@ -203,6 +217,12 @@ extension View {
 extension View {
     func actionIconStyle() -> some View {
         self.modifier(ActionIconStyle())
+    }
+}
+
+extension View {
+    func saveButtonStyle(type: String) -> some View {
+        self.modifier(SaveButtonStyle(type: type))
     }
 }
 

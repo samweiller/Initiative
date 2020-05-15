@@ -50,12 +50,20 @@ extension Notification {
 
 func getColorFromType(type: String) -> String {
     switch type {
-    case "Party":
+    case "Party", "Initiative":
         return "CorePurple"
     case "Enemy":
         return "CoreCoral"
     case "Ally":
         return "CoreTeal"
+    case "Heal":
+        return "HealGreen"
+    case "Damage":
+        return "DamageRed"
+    case "Disabled":
+        return "CoreDisabled"
+    case "Cancel":
+        return "Clear"
     default:
         return "Text Primary"
     }

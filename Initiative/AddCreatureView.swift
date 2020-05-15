@@ -43,7 +43,6 @@ struct AddCreatureView: View {
                     }
                 }
                 
-//                ScrollView {
                 VStack {
                     VStack(alignment: .leading, spacing: formSpacing) {
                         Text("Name").formLabelStyle()
@@ -51,7 +50,6 @@ struct AddCreatureView: View {
                             .introspectTextField { textField in
                                textField.becomeFirstResponder()
                             }
-//                        AutoFocusTextField(text: $name)
                             .textFieldStyle(FormTextFieldStyle())
                         
                     }.padding([.horizontal])
@@ -93,17 +91,6 @@ struct AddCreatureView: View {
                         }.padding([.horizontal])
                     }
                     HStack {
-//                        Button(action: {
-//                           self.showModal = false
-//                        }) {
-//                            Text("Cancel")
-//                                .fontWeight(.bold)
-//                                .frame(minWidth: 0, maxWidth: .infinity)
-//                                .padding(.all, 11)
-//                                .cornerRadius(8)
-//                                .foregroundColor(.gray)
-//
-//                        }.padding([.horizontal])
                         Button(action: {
                             let creature = Creature(context: self.moc)
                             creature.type = self.creatureType
@@ -111,23 +98,16 @@ struct AddCreatureView: View {
                             creature.maxHP = self.maxHP
                             creature.currentHP = self.currentHP
                             creature.initiative = self.initiativeValue
+                            creature.creatureID = UUID()
                             try? self.moc.save()
                             self.showModal = false
                         }) {
                             Text("Save")
-                                .fontWeight(.bold)
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .padding(.all, 11)
-                                .background(Color("CorePurple"))
-                                .cornerRadius(8)
-                                .foregroundColor(.white)
-                            
+                                .saveButtonStyle(type: self.creatureType == "" ? "Disabled" : self.creatureType)
+                                .animation(.easeInOut(duration: 0.5))
                         }.padding([.horizontal])
                     }.padding(.top)
                 }
-//                .padding(.bottom, keyboardHeight)
-//                .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
-//                }
                 Spacer()
             }
         }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))

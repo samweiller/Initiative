@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Creature" representedClassName="Creature" syncable="YES" codeGenerationType="class">
+        <attribute name="creatureID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="currentHP" optional="YES" attributeType="String"/>
         <attribute name="initiative" optional="YES" attributeType="String"/>
         <attribute name="maxHP" optional="YES" attributeType="String"/>
@@ -28,7 +29,7 @@
         <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="parties" inverseEntity="Encounter"/>
     </entity>
     <elements>
-        <element name="Creature" positionX="-304.31640625" positionY="-309.04296875" width="128" height="163"/>
+        <element name="Creature" positionX="-304.31640625" positionY="-309.04296875" width="128" height="178"/>
         <element name="CreatureGroup" positionX="-100.2421875" positionY="-489.63671875" width="128" height="103"/>
         <element name="Encounter" positionX="-56.75390625" positionY="-283.6015625" width="128" height="103"/>
         <element name="Party" positionX="135.7421875" positionY="-219.1015625" width="128" height="88"/>

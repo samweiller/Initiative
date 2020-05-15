@@ -25,6 +25,7 @@ struct InitiativeView: View {
     @Environment(\.managedObjectContext) var moc
     
     @State private var showModal = false
+    @State private var showAlert = false
     
     var body: some View {
         ZStack {
