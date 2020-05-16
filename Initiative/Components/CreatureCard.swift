@@ -12,6 +12,10 @@ import CoreData
 struct CreatureCard: View {
     let creature: Creature
     
+    @Binding var showAlert: Bool
+    @Binding var alertContent: Creature
+//    @Binding var alertContent: Dictionary<String, Any>?
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 4) {
@@ -38,7 +42,15 @@ struct CreatureCard: View {
                 .cornerRadius(8, corners: [.topLeft, .topRight])
            
             HStack {
-                Button(action: {print("init")}) {
+                Button(action: {
+                    self.showAlert = true
+                    self.alertContent = self.creature
+//                    self.alertContent = [
+//                        "creature": self.creature,
+//                        "type": "Initiative"
+//                    ]
+                    print("set init")
+                }) {
                     Image(systemName: "hexagon")
                     .actionIconStyle()
                 }.padding([.horizontal])
@@ -65,19 +77,19 @@ struct CreatureCard: View {
 }
 
 
-struct CreatureCard_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let coreDataObject = Creature(context: context)
-        coreDataObject.name = "Goblin"
-        coreDataObject.type = "Enemy"
-        coreDataObject.initiative = "19"
-        coreDataObject.maxHP = "30"
-        coreDataObject.currentHP = "25"
-        return ZStack {
-            Color(.gray).edgesIgnoringSafeArea(.all)
-            CreatureCard(creature: coreDataObject).environment(\.managedObjectContext, context)
-        }
-        //        Text("Hallo")
-    }
-}
+//struct CreatureCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        let coreDataObject = Creature(context: context)
+//        coreDataObject.name = "Goblin"
+//        coreDataObject.type = "Enemy"
+//        coreDataObject.initiative = "19"
+//        coreDataObject.maxHP = "30"
+//        coreDataObject.currentHP = "25"
+//        return ZStack {
+//            Color(.gray).edgesIgnoringSafeArea(.all)
+//            CreatureCard(creature: coreDataObject, showAlert: .constant(true)).environment(\.managedObjectContext, context)
+//        }
+//        //        Text("Hallo")
+//    }
+//}

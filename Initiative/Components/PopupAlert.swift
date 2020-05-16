@@ -53,12 +53,16 @@ struct PopupAlert: View {
                 .textFieldStyle(FormTextFieldStyle())
             
             HStack {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        self.showAlert = false
+                    }
+                }) {
                     Text("Cancel")
                 }
                 .saveButtonStyle(type: "Cancel")
                 Spacer()
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {print("Hallo")}) {
                     HStack {
                         Image(systemName: self.typeIcon)
 
@@ -86,11 +90,11 @@ struct PopupAlert_Previews: PreviewProvider {
         return ZStack {
             Color(.gray).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
-                PopupAlert(creature: coreDataObject, alertType: "Heal").environment(\.managedObjectContext, context)
+                PopupAlert(creature: coreDataObject, alertType: "Heal", showAlert: .constant(true)).environment(\.managedObjectContext, context)
                 
-                PopupAlert(creature: coreDataObject, alertType: "Damage").environment(\.managedObjectContext, context)
+                PopupAlert(creature: coreDataObject, alertType: "Damage", showAlert: .constant(true)).environment(\.managedObjectContext, context)
                 
-                PopupAlert(creature: coreDataObject, alertType: "Initiative").environment(\.managedObjectContext, context)
+                PopupAlert(creature: coreDataObject, alertType: "Initiative", showAlert: .constant(true)).environment(\.managedObjectContext, context)
             }.padding()
         }
     }
