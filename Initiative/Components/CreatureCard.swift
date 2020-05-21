@@ -40,11 +40,11 @@ struct CreatureCard: View {
                 Button(action: {
                     self.showAlert = true
                     self.alertContent = self.creature
-                    self.alertType = "Damage"
+                    self.alertType = "HP"
                 }) {
                     HStack(spacing: 4) {
                         Text(creature.currentHP ?? "?").cardCurrentHPStyle()
-                        VStack(spacing: -1) {
+                        VStack(spacing: -3) {
                             Text("HP").cardHPLabelStyle()
                             Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
                         }

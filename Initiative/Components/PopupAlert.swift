@@ -62,36 +62,75 @@ struct PopupAlert: View {
                         self.showAlert = false
                     }
                 }) {
-                    Text("Cancel")
+                    Image(systemName: "xmark")
                 }
-                .saveButtonStyle(type: "Cancel")
+                .smallCancelStyle()
+                .padding(.trailing, 10.0)
                 Spacer()
-                Button(action: {
-                    self.moc.performAndWait {
-                        switch self.alertType {
-                        case "Heal":
+                
+                if (self.alertType == "HP") {
+                    Button(action: {
+                        self.moc.performAndWait {
                             self.creature.currentHP = addNumbers(first: self.creature.currentHP!, second: self.value)
-                        case "Damage":
-                            self.creature.currentHP = subtractNumbers(first: self.creature.currentHP!, second: self.value)
-                        case "Initiative":
-                            self.creature.initiative = self.value
-                        default:
-                            print("unable to save")
+                            try? self.moc.save()
                         }
-                        
-                        try? self.moc.save()
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            self.showAlert = false
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "bandage")
+                            Text("Heal")
+                        }
                     }
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        self.showAlert = false
+                    .saveButtonStyle(type: "Heal")
+                    Button(action: {
+                        self.moc.performAndWait {
+                            self.creature.currentHP = subtractNumbers(first: self.creature.currentHP!, second: self.value)
+                            try? self.moc.save()
+                        }
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            self.showAlert = false
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "burst")
+                            Text("Damage")
+                        }
                     }
-                }) {
-                    HStack {
-                        Image(systemName: self.typeIcon)
-                        
-                        Text(self.alertType)
+                    .saveButtonStyle(type: "Damage")
+                } else {
+                    Button(action: {
+                        self.moc.performAndWait {
+                            switch self.alertType {
+                            case "Heal":
+                                self.creature.currentHP = addNumbers(first: self.creature.currentHP!, second: self.value)
+                            case "Damage":
+                                self.creature.currentHP = subtractNumbers(first: self.creature.currentHP!, second: self.value)
+                            case "Initiative":
+                                self.creature.initiative = self.value
+                            default:
+                                print("unable to save")
+                            }
+                            
+                            try? self.moc.save()
+                        }
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            self.showAlert = false
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: self.typeIcon)
+                            
+                            if self.alertType == "Initiative" {
+                                Text("Set Initiative")
+                            } else {
+                                Text(self.alertType)
+                            }
+                        }
                     }
+                    .saveButtonStyle(type: self.alertType)
                 }
-                .saveButtonStyle(type: self.alertType)
             }.padding(.top, 5)
         }.frame(maxWidth: .infinity)
             .padding()
@@ -112,7 +151,7 @@ struct PopupAlert_Previews: PreviewProvider {
         return ZStack {
             Color(.gray).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
-                PopupAlert(creature: coreDataObject, alertType: "Heal", showAlert: .constant(true)).environment(\.managedObjectContext, context)
+                PopupAlert(creature: coreDataObject, alertType: "HP", showAlert: .constant(true)).environment(\.managedObjectContext, context)
                 
                 PopupAlert(creature: coreDataObject, alertType: "Damage", showAlert: .constant(true)).environment(\.managedObjectContext, context)
                 

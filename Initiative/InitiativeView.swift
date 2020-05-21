@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import Foundation
 
 struct InitiativeView: View {
     init() {
@@ -22,13 +23,19 @@ struct InitiativeView: View {
 
     }
     
-    @FetchRequest(entity: Creature.entity(), sortDescriptors: []) var creatures: FetchedResults<Creature>
+    @FetchRequest(
+        entity: Creature.entity(),
+        sortDescriptors: [
+//            NSSortDescriptor(keyPath: \Creature.initiative, ascending: false)
+        ]
+    ) var creatures: FetchedResults<Creature>
     @Environment(\.managedObjectContext) var moc
     
     @State private var showModal = false
     @State private var showAlert = false
     @State private var alertContent: Creature = Creature()
     @State private var alertType = ""
+    @State private var sortBy = "Initiative"
         
     var body: some View {
         ZStack {
@@ -49,7 +56,13 @@ struct InitiativeView: View {
                     }
                 }.background(Color("MainBackground"))
                 List {
-                    ForEach(creatures, id: \.name) { creature in
+                    ForEach(creatures.sorted(by: {
+                        if self.sortBy == "Initiative" {
+                            return $0.initiative!.localizedStandardCompare($1.initiative!) == .orderedDescending
+                        } else {
+                            return true
+                        }
+                    }), id: \.creatureID) { creature in
                         CreatureCard(creature: creature, showAlert: self.$showAlert, alertContent: self.$alertContent, alertType: self.$alertType)
                     }
                     .onDelete { indexSet in

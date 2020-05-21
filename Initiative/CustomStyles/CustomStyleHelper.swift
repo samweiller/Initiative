@@ -42,6 +42,17 @@ struct SaveButtonStyle: ViewModifier {
     }
 }
 
+struct SmallCancelStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Bold", size: 16))
+            .frame(width: 40, height: 40)
+            .background(Color("CoreDisabled"))
+            .cornerRadius(8)
+            .foregroundColor(.white)
+    }
+}
+
 // Form Styles
 struct FormLabel: ViewModifier {
     func body(content: Content) -> some View {
@@ -117,7 +128,7 @@ struct CardCurrentHPStyle: ViewModifier {
 struct CardMaxHPStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("CircularStd-Book", size: 12))
+            .font(.custom("CircularStd-Book", size: 14))
             .foregroundColor(Color("Medium Emphasis Text"))
     }
 }
@@ -125,7 +136,7 @@ struct CardMaxHPStyle: ViewModifier {
 struct CardHPLabelStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("CircularStd-Book", size: 11))
+            .font(.custom("CircularStd-Book", size: 12))
             .foregroundColor(Color("Text Primary"))
     }
 }
@@ -223,6 +234,12 @@ extension View {
 extension View {
     func saveButtonStyle(type: String) -> some View {
         self.modifier(SaveButtonStyle(type: type))
+    }
+}
+
+extension View {
+    func smallCancelStyle() -> some View {
+        self.modifier(SmallCancelStyle())
     }
 }
 
