@@ -48,6 +48,7 @@ struct AddCreatureView: View {
                         Text("Name").formLabelStyle()
                         TextField("", text: $name)
                             .introspectTextField { textField in
+                                print("TEXT")
                                textField.becomeFirstResponder()
                             }
                             .textFieldStyle(FormTextFieldStyle())

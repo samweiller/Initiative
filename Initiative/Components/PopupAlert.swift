@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-//import Introspect
+import Introspect
 
 struct PopupAlert: View {
     let creature: Creature
@@ -28,7 +28,7 @@ struct PopupAlert: View {
     
     @State var value: String = ""
     @Binding var showAlert: Bool
-
+    
     
     var body: some View {
         VStack {
@@ -48,12 +48,15 @@ struct PopupAlert: View {
             
             TextField("", text: $value)
                 .introspectTextField { textField in
-                   textField.becomeFirstResponder()
-                }
-                .textFieldStyle(FormTextFieldStyle())
+                    print("INTRO")
+                    textField.becomeFirstResponder()
+            }
+            .textFieldStyle(FormTextFieldStyle())
+            .keyboardType(/*@START_MENU_TOKEN@*/.numberPad/*@END_MENU_TOKEN@*/)
             
             HStack {
                 Button(action: {
+                    print("canceling")
                     withAnimation(.easeInOut(duration: 0.25)) {
                         self.showAlert = false
                     }
@@ -65,16 +68,16 @@ struct PopupAlert: View {
                 Button(action: {print("Hallo")}) {
                     HStack {
                         Image(systemName: self.typeIcon)
-
-                    Text(self.alertType)
+                        
+                        Text(self.alertType)
                     }
                 }
                 .saveButtonStyle(type: self.alertType)
             }.padding(.top, 5)
         }.frame(maxWidth: .infinity)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(8)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
     }
 }
 

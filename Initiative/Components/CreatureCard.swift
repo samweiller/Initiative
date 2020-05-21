@@ -14,17 +14,24 @@ struct CreatureCard: View {
     
     @Binding var showAlert: Bool
     @Binding var alertContent: Creature
+    @Binding var alertType: String
+    
 //    @Binding var alertContent: Dictionary<String, Any>?
     
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 4) {
-                ZStack {
-                    Hexagon(type: creature.type!)
-                        .frame(width: 60, height: 70)
-                    Text(creature.initiative ?? "?").multilineTextAlignment(.center).padding(2.0).cardInitValueStyle().opacity(0.87)
-                }.foregroundColor(Color(getColorFromType(type: creature.type!)))
-                
+                Button(action: {
+                    self.showAlert = true
+                    self.alertContent = self.creature
+                    self.alertType = "Initiative"
+                }) {
+                    ZStack {
+                        Hexagon(type: creature.type!)
+                            .frame(width: 60, height: 70)
+                        Text(creature.initiative ?? "?").multilineTextAlignment(.center).padding(2.0).cardInitValueStyle().opacity(0.87)
+                    }.foregroundColor(Color(getColorFromType(type: creature.type!)))
+                }
                 VStack(alignment: .leading) {
                     Text(creature.name ?? "Unknown").cardNameStyle()
                     Text(creature.type ?? "Unknown").cardTypeStyle()
@@ -45,10 +52,6 @@ struct CreatureCard: View {
                 Button(action: {
                     self.showAlert = true
                     self.alertContent = self.creature
-//                    self.alertContent = [
-//                        "creature": self.creature,
-//                        "type": "Initiative"
-//                    ]
                     print("set init")
                 }) {
                     Image(systemName: "hexagon")
@@ -77,19 +80,22 @@ struct CreatureCard: View {
 }
 
 
-//struct CreatureCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//        let coreDataObject = Creature(context: context)
-//        coreDataObject.name = "Goblin"
-//        coreDataObject.type = "Enemy"
-//        coreDataObject.initiative = "19"
-//        coreDataObject.maxHP = "30"
-//        coreDataObject.currentHP = "25"
-//        return ZStack {
-//            Color(.gray).edgesIgnoringSafeArea(.all)
-//            CreatureCard(creature: coreDataObject, showAlert: .constant(true)).environment(\.managedObjectContext, context)
-//        }
-//        //        Text("Hallo")
-//    }
-//}
+struct CreatureCard_Previews: PreviewProvider {
+    @State(initialValue: Creature()) var theCreature: Creature
+
+    static var previews: some View {
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let coreDataObject = Creature(context: context)
+        coreDataObject.name = "Goblin"
+        coreDataObject.type = "Enemy"
+        coreDataObject.initiative = "19"
+        coreDataObject.maxHP = "30"
+        coreDataObject.currentHP = "25"
+        return ZStack {
+            Color(.gray).edgesIgnoringSafeArea(.all)
+            CreatureCard(creature: coreDataObject, showAlert: .constant(true), alertContent: .constant(coreDataObject), alertType: .constant("Initiative")).environment(\.managedObjectContext, context)
+        }
+        //        Text("Hallo")
+    }
+}

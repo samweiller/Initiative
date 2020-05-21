@@ -28,7 +28,7 @@ struct InitiativeView: View {
     @State private var showModal = false
     @State private var showAlert = false
     @State private var alertContent: Creature = Creature()
-    @State private var type = "Heal"
+    @State private var alertType = ""
     
     var body: some View {
         ZStack {
@@ -50,7 +50,7 @@ struct InitiativeView: View {
                 }.background(Color("MainBackground"))
                 List {
                     ForEach(creatures, id: \.name) { creature in
-                        CreatureCard(creature: creature, showAlert: self.$showAlert, alertContent: self.$alertContent)
+                        CreatureCard(creature: creature, showAlert: self.$showAlert, alertContent: self.$alertContent, alertType: self.$alertType)
 //                        HStack(spacing: 4) {
 //                            ZStack {
 //                                Hexagon(type: creature.type!)
@@ -88,7 +88,7 @@ struct InitiativeView: View {
             if self.showAlert {
                 ZStack {
                     Color("CoreDisabled")
-                    PopupAlert(creature: self.alertContent, alertType: self.type, showAlert: self.$showAlert)
+                    PopupAlert(creature: self.alertContent, alertType: self.alertType, showAlert: self.$showAlert)
                 }
             } else {
                  EmptyView()
