@@ -1,15 +1,15 @@
 //
-//  PopupAlert.swift
+//  HealthPopup.swift
 //  Initiative
 //
-//  Created by Sam Weiller on 5/15/20.
+//  Created by Sam Weiller on 5/21/20.
 //  Copyright © 2020 saweiller. All rights reserved.
 //
 
 import SwiftUI
 import Introspect
 
-struct PopupAlert: View {
+struct HealthPopup: View {
     let creature: Creature
     let alertType: String // Damage, Heal, Initiative
     
@@ -62,23 +62,20 @@ struct PopupAlert: View {
                         self.showAlert = false
                     }
                 }) {
-                    Text("Cancel")
+                    Image(systemName: "xmark")
                 }
-                .saveButtonStyle(type: "Cancel")
+                .font(.custom("CircularStd-Bold", size: 16))
+                .frame(width: 40, height: 40)
+//                .padding(.all, 11)
+                .background(Color("CoreDisabled"))
+                .cornerRadius(8)
+                .foregroundColor(.white)
+                
+                Spacer()
                 Spacer()
                 Button(action: {
                     self.moc.performAndWait {
-                        switch self.alertType {
-                        case "Heal":
-                            self.creature.currentHP = addNumbers(first: self.creature.currentHP!, second: self.value)
-                        case "Damage":
-                            self.creature.currentHP = subtractNumbers(first: self.creature.currentHP!, second: self.value)
-                        case "Initiative":
-                            self.creature.initiative = self.value
-                        default:
-                            print("unable to save")
-                        }
-                        
+                        self.creature.currentHP = addNumbers(first: self.creature.currentHP!, second: self.value)
                         try? self.moc.save()
                     }
                     withAnimation(.easeInOut(duration: 0.25)) {
@@ -86,12 +83,27 @@ struct PopupAlert: View {
                     }
                 }) {
                     HStack {
-                        Image(systemName: self.typeIcon)
-                        
-                        Text(self.alertType)
+                        Image(systemName: "bandage")
+                        Text("Heal")
                     }
                 }
-                .saveButtonStyle(type: self.alertType)
+                .saveButtonStyle(type: "Heal")
+                Button(action: {
+                    self.moc.performAndWait {
+                        self.creature.currentHP = subtractNumbers(first: self.creature.currentHP!, second: self.value)
+                        try? self.moc.save()
+                    }
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        self.showAlert = false
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "burst")
+                        Text("Damage")
+                    }
+                }
+                .saveButtonStyle(type: "Damage")
+                
             }.padding(.top, 5)
         }.frame(maxWidth: .infinity)
             .padding()
@@ -100,7 +112,7 @@ struct PopupAlert: View {
     }
 }
 
-struct PopupAlert_Previews: PreviewProvider {
+struct HealthPopup_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let coreDataObject = Creature(context: context)
@@ -112,11 +124,11 @@ struct PopupAlert_Previews: PreviewProvider {
         return ZStack {
             Color(.gray).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
-                PopupAlert(creature: coreDataObject, alertType: "Heal", showAlert: .constant(true)).environment(\.managedObjectContext, context)
+                HealthPopup(creature: coreDataObject, alertType: "Heal", showAlert: .constant(true)).environment(\.managedObjectContext, context)
                 
-                PopupAlert(creature: coreDataObject, alertType: "Damage", showAlert: .constant(true)).environment(\.managedObjectContext, context)
+                HealthPopup(creature: coreDataObject, alertType: "Damage", showAlert: .constant(true)).environment(\.managedObjectContext, context)
                 
-                PopupAlert(creature: coreDataObject, alertType: "Initiative", showAlert: .constant(true)).environment(\.managedObjectContext, context)
+                HealthPopup(creature: coreDataObject, alertType: "Health", showAlert: .constant(true)).environment(\.managedObjectContext, context)
             }.padding()
         }
     }

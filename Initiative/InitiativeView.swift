@@ -29,7 +29,7 @@ struct InitiativeView: View {
     @State private var showAlert = false
     @State private var alertContent: Creature = Creature()
     @State private var alertType = ""
-    
+        
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -51,36 +51,11 @@ struct InitiativeView: View {
                 List {
                     ForEach(creatures, id: \.name) { creature in
                         CreatureCard(creature: creature, showAlert: self.$showAlert, alertContent: self.$alertContent, alertType: self.$alertType)
-//                        HStack(spacing: 4) {
-//                            ZStack {
-//                                Hexagon(type: creature.type!)
-//                                    .frame(width: 60, height: 70)
-//                                Text(creature.initiative ?? "?").multilineTextAlignment(.center).padding(2.0).cardInitValueStyle().opacity(0.87)
-//                            }.foregroundColor(Color(getColorFromType(type: creature.type!)))
-//
-//                            VStack(alignment: .leading) {
-//                                Text(creature.name ?? "Unknown").cardNameStyle()
-//                                Text(creature.type ?? "Unknown").cardTypeStyle()
-//                            }.padding(.leading)
-////                            Spacer()
-//                            Button(action: {
-//                                withAnimation(.easeInOut(duration: 0.25)) {
-//                                    self.showAlert = true
-//                                    self.alertContent = creature
-//                                }
-//                            }) {
-//                            Text("Show Alert")
-//                            }
-//                            Text(creature.currentHP ?? "?").cardCurrentHPStyle()
-//                            VStack(spacing: -1) {
-//                                Text("HP").cardHPLabelStyle()
-//                                Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
-//                            }
-//                        }
-//                            .frame(maxWidth: .infinity)
-//                            .padding()
-//                            .background(Color.white)
-//                            .cornerRadius(8, corners: [.topLeft, .topRight])
+                    }
+                    .onDelete { indexSet in
+                        for index in indexSet {
+                            self.moc.delete(self.creatures[index])
+                        }
                     }
                 }
                 
@@ -89,6 +64,7 @@ struct InitiativeView: View {
                 ZStack {
                     Color("CoreDisabled")
                     PopupAlert(creature: self.alertContent, alertType: self.alertType, showAlert: self.$showAlert)
+                    .padding()
                 }
             } else {
                  EmptyView()

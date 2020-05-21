@@ -68,3 +68,11 @@ func getColorFromType(type: String) -> String {
         return "Text Primary"
     }
 }
+
+func addNumbers(first: String, second: String) -> String {
+    return String(Int16(first)! + Int16(second)!)
+}
+
+func subtractNumbers(first: String, second: String) -> String {
+    return String(Int16(first)! - Int16(second)!)
+}

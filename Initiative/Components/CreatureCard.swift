@@ -31,17 +31,25 @@ struct CreatureCard: View {
                             .frame(width: 60, height: 70)
                         Text(creature.initiative ?? "?").multilineTextAlignment(.center).padding(2.0).cardInitValueStyle().opacity(0.87)
                     }.foregroundColor(Color(getColorFromType(type: creature.type!)))
-                }
+                }.buttonStyle(PlainButtonStyle())
                 VStack(alignment: .leading) {
                     Text(creature.name ?? "Unknown").cardNameStyle()
                     Text(creature.type ?? "Unknown").cardTypeStyle()
                 }.padding(.leading)
                 Spacer()
-                Text(creature.currentHP ?? "?").cardCurrentHPStyle()
-                VStack(spacing: -1) {
-                    Text("HP").cardHPLabelStyle()
-                    Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
-                }
+                Button(action: {
+                    self.showAlert = true
+                    self.alertContent = self.creature
+                    self.alertType = "Damage"
+                }) {
+                    HStack(spacing: 4) {
+                        Text(creature.currentHP ?? "?").cardCurrentHPStyle()
+                        VStack(spacing: -1) {
+                            Text("HP").cardHPLabelStyle()
+                            Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
+                        }
+                    }
+                }.buttonStyle(PlainButtonStyle())
             }
                 .frame(maxWidth: .infinity)
                 .padding()

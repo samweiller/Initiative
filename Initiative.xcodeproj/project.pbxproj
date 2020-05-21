@@ -20,6 +20,7 @@
 		C55C4AB2246B125800F2E121 /* InitiativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55C4AB1246B125800F2E121 /* InitiativeView.swift */; };
 		C55C4AB4246B4B6300F2E121 /* Initiative.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = C55C4AB3246B4B6300F2E121 /* Initiative.xcdatamodel */; };
 		C55C4AB6246B4F0100F2E121 /* AddCreatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55C4AB5246B4F0100F2E121 /* AddCreatureView.swift */; };
+		C55ED82C24770EED003D79E2 /* HealthPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55ED82B24770EED003D79E2 /* HealthPopup.swift */; };
 		C5934FA5246B96CB00F58A8F /* TypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FA4246B96CB00F58A8F /* TypePicker.swift */; };
 		C5934FA7246C807000F58A8F /* CustomStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5934FA6246C807000F58A8F /* CustomStyleHelper.swift */; };
 		C5934FAF246C80BF00F58A8F /* CircularStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5934FA9246C80BF00F58A8F /* CircularStd-Black.otf */; };
@@ -71,6 +72,7 @@
 		C55C4AB1246B125800F2E121 /* InitiativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiativeView.swift; sourceTree = "<group>"; };
 		C55C4AB3246B4B6300F2E121 /* Initiative.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Initiative.xcdatamodel; path = Initiative.xcdatamodeld/Initiative.xcdatamodel; sourceTree = "<group>"; };
 		C55C4AB5246B4F0100F2E121 /* AddCreatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreatureView.swift; sourceTree = "<group>"; };
+		C55ED82B24770EED003D79E2 /* HealthPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPopup.swift; sourceTree = "<group>"; };
 		C5934FA4246B96CB00F58A8F /* TypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePicker.swift; sourceTree = "<group>"; };
 		C5934FA6246C807000F58A8F /* CustomStyleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStyleHelper.swift; sourceTree = "<group>"; };
 		C5934FA9246C80BF00F58A8F /* CircularStd-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Black.otf"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				C5934FBB246CEDA800F58A8F /* Hexagon.swift */,
 				C5934FBD246CEDE300F58A8F /* HexagonParameters.swift */,
 				C5BE1F2F246F282900021190 /* PopupAlert.swift */,
+				C55ED82B24770EED003D79E2 /* HealthPopup.swift */,
 				C5301419246F4E24006EFDC8 /* AlertHelper.swift */,
 			);
 			path = Components;
@@ -365,6 +368,7 @@
 				C5934FB8246CAF4700F58A8F /* GeneralHelpers.swift in Sources */,
 				C5934FA7246C807000F58A8F /* CustomStyleHelper.swift in Sources */,
 				C55C4A86246B117100F2E121 /* ContentView.swift in Sources */,
+				C55ED82C24770EED003D79E2 /* HealthPopup.swift in Sources */,
 				C55C4A81246B117100F2E121 /* SceneDelegate.swift in Sources */,
 				C55C4AB2246B125800F2E121 /* InitiativeView.swift in Sources */,
 				C5934FBA246CC4FD00F58A8F /* CreatureCard.swift in Sources */,
