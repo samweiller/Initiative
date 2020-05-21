@@ -38,7 +38,7 @@ struct AddCreatureView: View {
                         self.showModal = false
                     }) {
                     Text("Cancel")
-                        .foregroundColor(Color("CorePurple"))
+                        .foregroundColor(Color(getColorFromType(type: self.creatureType)))
                         .padding(.trailing)
                     }
                 }
@@ -91,6 +91,19 @@ struct AddCreatureView: View {
                         }.padding([.horizontal])
                     }
                     HStack {
+                        if self.modalType == "new" {
+                            EmptyView()
+                        } else {
+                            Button(action: {
+                                self.moc.delete(self.creature!)
+                                self.showModal = false
+                            }) {
+                                HStack {
+                                    Image(systemName: "trash")
+                                }
+                            }.smallButtonStyle(type: "Delete")
+                                .padding([.horizontal])
+                        }
                         Button(action: {
                             var creatureObject: Creature
                             if self.modalType == "new" {

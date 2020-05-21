@@ -58,7 +58,7 @@ func getColorFromType(type: String) -> String {
         return "CoreTeal"
     case "Heal":
         return "HealGreen"
-    case "Damage":
+    case "Damage", "Delete":
         return "DamageRed"
     case "Disabled":
         return "CoreDisabled"

@@ -64,7 +64,7 @@ struct PopupAlert: View {
                 }) {
                     Image(systemName: "xmark")
                 }
-                .smallCancelStyle()
+                .smallButtonStyle(type: "Disabled")
                 .padding(.trailing, 10.0)
                 Spacer()
                 

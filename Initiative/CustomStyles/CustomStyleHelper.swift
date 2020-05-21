@@ -53,6 +53,19 @@ struct SmallCancelStyle: ViewModifier {
     }
 }
 
+struct SmallButtonStyle: ViewModifier {
+    var type: String
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Bold", size: 16))
+            .frame(width: 40, height: 40)
+            .background(Color(getColorFromType(type: type)))
+            .cornerRadius(8)
+            .foregroundColor(.white)
+    }
+}
+
 // Form Styles
 struct FormLabel: ViewModifier {
     func body(content: Content) -> some View {
@@ -234,6 +247,12 @@ extension View {
 extension View {
     func saveButtonStyle(type: String) -> some View {
         self.modifier(SaveButtonStyle(type: type))
+    }
+}
+
+extension View {
+    func smallButtonStyle(type: String) -> some View {
+        self.modifier(SmallButtonStyle(type: type))
     }
 }
 

@@ -29,7 +29,7 @@ struct CreatureCard: View {
                     self.alertType = "Initiative"
                 }) {
                     ZStack {
-                        Hexagon(type: creature.type!)
+                        Hexagon(type: creature.type ?? "")
                             .frame(width: 60, height: 70)
                         Text(creature.initiative ?? "?").multilineTextAlignment(.center).padding(2.0).cardInitValueStyle().opacity(0.87)
                     }.foregroundColor(Color(getColorFromType(type: creature.type!)))
