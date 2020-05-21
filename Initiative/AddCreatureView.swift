@@ -11,17 +11,17 @@ import Combine
 import Introspect
 
 struct AddCreatureView: View {
+    var modalType: String
+    @Binding var showModal: Bool
+    var creature: Creature? = nil
+    
     @State var name: String = ""
     @State var maxHP: String = ""
     @State var currentHP: String = ""
     @State var initiativeValue: String = ""
     @State var creatureGroup: String = ""
-    
     @State var creatureType: String = ""
-    
     @State private var keyboardHeight: CGFloat = 0
-    
-    @Binding var showModal: Bool
     
     @Environment(\.managedObjectContext) var moc
     
@@ -31,7 +31,7 @@ struct AddCreatureView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text("Add Creature")
+                    Text(modalType == "new" ? "Add Creature" : "Edit Creature")
                         .viewTitleStyle()
                     Spacer()
                     Button(action: {
@@ -48,7 +48,6 @@ struct AddCreatureView: View {
                         Text("Name").formLabelStyle()
                         TextField("", text: $name)
                             .introspectTextField { textField in
-                                print("TEXT")
                                textField.becomeFirstResponder()
                             }
                             .textFieldStyle(FormTextFieldStyle())
@@ -93,13 +92,19 @@ struct AddCreatureView: View {
                     }
                     HStack {
                         Button(action: {
-                            let creature = Creature(context: self.moc)
-                            creature.type = self.creatureType
-                            creature.name = self.name
-                            creature.maxHP = self.maxHP
-                            creature.currentHP = self.currentHP
-                            creature.initiative = self.initiativeValue
-                            creature.creatureID = UUID()
+                            var creatureObject: Creature
+                            if self.modalType == "new" {
+                                creatureObject = Creature(context: self.moc)
+                                creatureObject.creatureID = UUID()
+                            } else {
+                                creatureObject = self.creature!
+                            }
+                            creatureObject.type = self.creatureType
+                            creatureObject.name = self.name
+                            creatureObject.maxHP = self.maxHP
+                            creatureObject.currentHP = self.currentHP
+                            creatureObject.initiative = self.initiativeValue
+                            
                             try? self.moc.save()
                             self.showModal = false
                         }) {
@@ -112,11 +117,21 @@ struct AddCreatureView: View {
                 Spacer()
             }
         }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))
+            .onAppear{
+                if self.creature != nil {
+                    let c = self.creature!
+                    self.name = c.name ?? ""
+                    self.maxHP = c.maxHP ?? ""
+                    self.currentHP = c.currentHP ?? ""
+                    self.initiativeValue = c.initiative ?? ""
+                    self.creatureType = c.type ?? ""
+                }
+        }
     }
 }
 
 struct AddCreatureView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCreatureView(showModal: .constant(true))
+        AddCreatureView(modalType: "new", showModal: .constant(true))
     }
 }

@@ -25,13 +25,12 @@ struct InitiativeView: View {
     
     @FetchRequest(
         entity: Creature.entity(),
-        sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Creature.initiative, ascending: false)
-        ]
+        sortDescriptors: []
     ) var creatures: FetchedResults<Creature>
     @Environment(\.managedObjectContext) var moc
     
     @State private var showModal = false
+    @State private var modalType = "" // new/edit
     @State private var showAlert = false
     @State private var alertContent: Creature = Creature()
     @State private var alertType = ""
@@ -45,13 +44,14 @@ struct InitiativeView: View {
                     Spacer()
                     Button(action: {
                         self.showModal.toggle()
+                        self.modalType = "new"
                     }) {
                         Image(systemName: "plus")
                             .padding(.trailing)
                         .foregroundColor(Color("CorePurple"))
                             .font(.title)
                     }.sheet(isPresented: $showModal) {
-                        AddCreatureView(showModal: self.$showModal)
+                        AddCreatureView(modalType: self.modalType, showModal: self.$showModal, creature: self.modalType == "new" ? nil : self.alertContent)
                             .environment(\.managedObjectContext, self.moc)
                     }
                 }.background(Color("MainBackground"))
@@ -63,7 +63,7 @@ struct InitiativeView: View {
                             return true
                         }
                     }), id: \.creatureID) { creature in
-                        CreatureCard(creature: creature, showAlert: self.$showAlert, alertContent: self.$alertContent, alertType: self.$alertType)
+                        CreatureCard(creature: creature, showAlert: self.$showAlert, alertContent: self.$alertContent, alertType: self.$alertType, showModal: self.$showModal, modalType: self.$modalType)
                     }
                     .onDelete { indexSet in
                         for index in indexSet {
@@ -78,7 +78,7 @@ struct InitiativeView: View {
                     Color("CoreDisabled")
                     PopupAlert(creature: self.alertContent, alertType: self.alertType, showAlert: self.$showAlert)
                     .padding()
-                }
+                }.edgesIgnoringSafeArea(.all)
             } else {
                  EmptyView()
             }

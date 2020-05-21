@@ -15,6 +15,8 @@ struct CreatureCard: View {
     @Binding var showAlert: Bool
     @Binding var alertContent: Creature
     @Binding var alertType: String
+    @Binding var showModal: Bool
+    @Binding var modalType: String
     
 //    @Binding var alertContent: Dictionary<String, Any>?
     
@@ -32,10 +34,17 @@ struct CreatureCard: View {
                         Text(creature.initiative ?? "?").multilineTextAlignment(.center).padding(2.0).cardInitValueStyle().opacity(0.87)
                     }.foregroundColor(Color(getColorFromType(type: creature.type!)))
                 }.buttonStyle(PlainButtonStyle())
-                VStack(alignment: .leading) {
-                    Text(creature.name ?? "Unknown").cardNameStyle()
-                    Text(creature.type ?? "Unknown").cardTypeStyle()
-                }.padding(.leading)
+                
+                Button(action: {
+                    self.showModal = true
+                    self.modalType = "edit"
+                    self.alertContent = self.creature
+                }) {
+                    VStack(alignment: .leading) {
+                        Text(creature.name ?? "Unknown").cardNameStyle()
+                        Text(creature.type ?? "Unknown").cardTypeStyle()
+                    }.padding(.leading)
+                }.buttonStyle(PlainButtonStyle())
                 Spacer()
                 Button(action: {
                     self.showAlert = true
@@ -102,7 +111,7 @@ struct CreatureCard_Previews: PreviewProvider {
         coreDataObject.currentHP = "25"
         return ZStack {
             Color(.gray).edgesIgnoringSafeArea(.all)
-            CreatureCard(creature: coreDataObject, showAlert: .constant(true), alertContent: .constant(coreDataObject), alertType: .constant("Initiative")).environment(\.managedObjectContext, context)
+            CreatureCard(creature: coreDataObject, showAlert: .constant(true), alertContent: .constant(coreDataObject), alertType: .constant("Initiative"), showModal: .constant(false), modalType: .constant("edit")).environment(\.managedObjectContext, context)
         }
         //        Text("Hallo")
     }
