@@ -95,9 +95,9 @@ struct InitiativeView: View {
                     Color("CoreDisabled")
                     PopupAlert(creature: self.alertContent, alertType: self.alertType, showAlert: self.$showAlert)
                     .padding()
+                        .transition(AnyTransition.slide)
+                        .animation(.default)
                 }.edgesIgnoringSafeArea(.all)
-            } else {
-                 EmptyView()
             }
         }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))
         .actionSheet(isPresented: $showingActionSheet) {

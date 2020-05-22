@@ -20,6 +20,14 @@ struct CreatureCard: View {
     
 //    @Binding var alertContent: Dictionary<String, Any>?
     
+    func activateAlertWithParameters(content: Creature, type: String) {
+        withAnimation {
+            self.showAlert = true
+        }
+        self.alertContent = content
+        self.alertType = type
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 4) {
@@ -63,29 +71,32 @@ struct CreatureCard: View {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(Color.white)
+//                .cornerRadius(8)
                 .cornerRadius(8, corners: [.topLeft, .topRight])
            
             HStack {
                 Button(action: {
-                    self.showAlert = true
-                    self.alertContent = self.creature
-                    print("set init")
+                    self.activateAlertWithParameters(content: self.creature, type: "Initiative")
                 }) {
-                    Image(systemName: "hexagon")
-                    .actionIconStyle()
+                    Image(systemName: "hexagon").actionIconStyle()
                 }.padding([.horizontal])
-                Button(action: {print("edit")}) {
-                    Image(systemName: "ellipsis")
-                        .actionIconStyle()
+                Button(action: {
+                    self.showModal = true
+                    self.modalType = "edit"
+                    self.alertContent = self.creature
+                }) {
+                    Image(systemName: "ellipsis").actionIconStyle()
                 }
                 Spacer()
-                Button(action: {print("heal")}) {
-                    Image(systemName: "bandage")
-                        .actionIconStyle()
+                Button(action: {
+                    self.activateAlertWithParameters(content: self.creature, type: "Heal")
+                }) {
+                    Image(systemName: "bandage").actionIconStyle()
                 }
-                Button(action: {print("attack")}) {
-                    Image(systemName: "burst")
-                        .actionIconStyle()
+                Button(action: {
+                    self.activateAlertWithParameters(content: self.creature, type: "Damage")
+                }) {
+                    Image(systemName: "burst").actionIconStyle()
                 }.padding([.horizontal])
             }
         .buttonStyle(PlainButtonStyle())
@@ -95,6 +106,8 @@ struct CreatureCard: View {
         }
     }
 }
+
+
 
 
 struct CreatureCard_Previews: PreviewProvider {

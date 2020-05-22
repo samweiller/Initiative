@@ -132,7 +132,8 @@ struct PopupAlert: View {
                     .saveButtonStyle(type: self.alertType)
                 }
             }.padding(.top, 5)
-        }.frame(maxWidth: .infinity)
+        }
+            .frame(maxWidth: .infinity)
             .padding()
             .background(Color.white)
             .cornerRadius(8)
