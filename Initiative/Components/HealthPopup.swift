@@ -39,7 +39,7 @@ struct HealthPopup: View {
                     Text(creature.type ?? "Unknown").cardTypeStyle()
                 }
                 Spacer()
-                Text(creature.currentHP ?? "?").cardCurrentHPStyle()
+                Text(creature.currentHP ?? "?").cardCurrentHPStyle(level: "healthy")
                 VStack(spacing: -1) {
                     Text("HP").cardHPLabelStyle()
                     Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()

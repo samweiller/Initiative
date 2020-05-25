@@ -60,7 +60,7 @@ struct CreatureCard: View {
                     self.alertType = "HP"
                 }) {
                     HStack(spacing: 4) {
-                        Text(creature.currentHP ?? "?").cardCurrentHPStyle()
+                        Text(creature.currentHP ?? "?").cardCurrentHPStyle(level: determineHPLevel(currentHP: creature.currentHP, maxHP: creature.maxHP))
                         VStack(spacing: -3) {
                             Text("HP").cardHPLabelStyle()
                             Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
@@ -70,13 +70,15 @@ struct CreatureCard: View {
             }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.white)
+                .background(creature.currentHP == "0" ? Color("CoreDisabled") : Color("Card Background"))
 //                .cornerRadius(8)
                 .cornerRadius(8, corners: [.topLeft, .topRight])
            
             HStack {
                 Button(action: {
-                    self.activateAlertWithParameters(content: self.creature, type: "Initiative")
+                    self.showAlert = true
+                    self.alertContent = self.creature
+                    self.alertType = "Initiative"
                 }) {
                     Image(systemName: "hexagon").actionIconStyle()
                 }.padding([.horizontal])
@@ -89,17 +91,21 @@ struct CreatureCard: View {
                 }
                 Spacer()
                 Button(action: {
-                    self.activateAlertWithParameters(content: self.creature, type: "Heal")
+                    self.showAlert = true
+                    self.alertContent = self.creature
+                    self.alertType = "Heal"
                 }) {
                     Image(systemName: "bandage").actionIconStyle()
                 }
                 Button(action: {
-                    self.activateAlertWithParameters(content: self.creature, type: "Damage")
+                    self.showAlert = true
+                    self.alertContent = self.creature
+                    self.alertType = "Damage"
                 }) {
                     Image(systemName: "burst").actionIconStyle()
                 }.padding([.horizontal])
             }
-        .buttonStyle(PlainButtonStyle())
+            .buttonStyle(PlainButtonStyle())
             .padding([.vertical], 6)
             .background(Color(getColorFromType(type: creature.type!) + "-Action"))
             .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
@@ -107,6 +113,22 @@ struct CreatureCard: View {
     }
 }
 
+func determineHPLevel(currentHP: String?, maxHP: String?) -> String {
+    let cHP = Double(currentHP ?? "0")
+    let mHP = Double(maxHP ?? "1")
+    let ratio = cHP!/mHP!
+    
+    switch ratio {
+    case 0.5.nextUp...1.0:
+        return "healthy"
+    case 0.25.nextUp...0.5:
+        return "hurting"
+    case 0.0...0.25:
+        return "dying"
+    default:
+        return "healthy"
+    }
+}
 
 
 

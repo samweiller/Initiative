@@ -92,11 +92,9 @@ struct InitiativeView: View {
             }
             if self.showAlert {
                 ZStack {
-                    Color("CoreDisabled")
+                    Color("Alert Overlay")
                     PopupAlert(creature: self.alertContent, alertType: self.alertType, showAlert: self.$showAlert)
                     .padding()
-                        .transition(AnyTransition.slide)
-                        .animation(.default)
                 }.edgesIgnoringSafeArea(.all)
             }
         }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))

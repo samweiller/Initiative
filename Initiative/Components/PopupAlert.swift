@@ -39,7 +39,7 @@ struct PopupAlert: View {
                     Text(creature.type ?? "Unknown").cardTypeStyle()
                 }
                 Spacer()
-                Text(creature.currentHP ?? "?").cardCurrentHPStyle()
+                Text(creature.currentHP ?? "?").cardCurrentHPStyle(level: determineHPLevel(currentHP: creature.currentHP, maxHP: creature.maxHP))
                 VStack(spacing: -1) {
                     Text("HP").cardHPLabelStyle()
                     Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
@@ -66,6 +66,7 @@ struct PopupAlert: View {
                 }
                 .smallButtonStyle(type: "Disabled")
                 .padding(.trailing, 10.0)
+                
                 Spacer()
                 
                 if (self.alertType == "HP") {
@@ -84,6 +85,7 @@ struct PopupAlert: View {
                         }
                     }
                     .saveButtonStyle(type: "Heal")
+                    
                     Button(action: {
                         self.moc.performAndWait {
                             self.creature.currentHP = subtractNumbers(first: self.creature.currentHP!, second: self.value)
@@ -135,7 +137,7 @@ struct PopupAlert: View {
         }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.white)
+            .background(Color("Card Background"))
             .cornerRadius(8)
     }
 }

@@ -131,10 +131,25 @@ struct CardTypeStyle: ViewModifier {
 }
 
 struct CardCurrentHPStyle: ViewModifier {
+    var level: String
+    
+    var theColor: Color {
+        switch level {
+        case "healthy":
+            return Color("Text Primary")
+        case "hurting":
+            return Color("CoreCoral")
+        case "dying":
+            return Color("DamageRed")
+        default:
+            return Color("Text Primary")
+        }
+    }
+    
     func body(content: Content) -> some View {
         content
             .font(.custom("CircularStd-Book", size: 30))
-            .foregroundColor(Color("Text Primary"))
+            .foregroundColor(theColor)
     }
 }
 
@@ -221,8 +236,8 @@ extension View {
 }
 
 extension View {
-    func cardCurrentHPStyle() -> some View {
-        self.modifier(CardCurrentHPStyle())
+    func cardCurrentHPStyle(level: String) -> some View {
+        self.modifier(CardCurrentHPStyle(level: level))
     }
 }
 
