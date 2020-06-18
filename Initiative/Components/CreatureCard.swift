@@ -60,10 +60,13 @@ struct CreatureCard: View {
                     self.alertType = "HP"
                 }) {
                     HStack(spacing: 4) {
-                        Text(creature.currentHP ?? "?").cardCurrentHPStyle(level: determineHPLevel(currentHP: creature.currentHP, maxHP: creature.maxHP))
-                        VStack(spacing: -3) {
-                            Text("HP").cardHPLabelStyle()
-                            Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
+                        if (creature.maxHP != "") {
+                            Text(creature.currentHP ?? "?")
+                                .cardCurrentHPStyle(level: determineHPLevel(currentHP: creature.currentHP, maxHP: creature.maxHP))
+                            VStack(spacing: -3) {
+                                Text("HP").cardHPLabelStyle()
+                                Text("/\(creature.maxHP ?? "?")").cardMaxHPStyle()
+                            }
                         }
                     }
                 }.buttonStyle(PlainButtonStyle())
@@ -114,9 +117,10 @@ struct CreatureCard: View {
 }
 
 func determineHPLevel(currentHP: String?, maxHP: String?) -> String {
-    let cHP = Double(currentHP ?? "0")
-    let mHP = Double(maxHP ?? "1")
-    let ratio = cHP!/mHP!
+    // When double tries to convert "", it returns nil. Need a coalescing operator to be sure a double actually comes back.s
+    let cHP = Double(currentHP!) ?? 0 // Originally Double(currentHP ?? "0") ?? 0
+    let mHP = Double(maxHP!) ?? 1
+    let ratio = cHP/mHP
     
     switch ratio {
     case 0.5.nextUp...1.0:

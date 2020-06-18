@@ -115,7 +115,11 @@ struct AddCreatureView: View {
                             creatureObject.type = self.creatureType
                             creatureObject.name = self.name
                             creatureObject.maxHP = self.maxHP
-                            creatureObject.currentHP = self.currentHP
+                            if (self.maxHP != "" && self.currentHP == "") {
+                                creatureObject.currentHP = self.maxHP
+                            } else {
+                                creatureObject.currentHP = self.currentHP
+                            }
                             creatureObject.initiative = self.initiativeValue
                             
                             try? self.moc.save()
