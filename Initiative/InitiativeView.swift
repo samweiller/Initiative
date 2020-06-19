@@ -26,7 +26,8 @@ struct InitiativeView: View {
     
     @FetchRequest(
         entity: Creature.entity(),
-        sortDescriptors: []
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "isLive == %@", true)
     ) var creatures: FetchedResults<Creature>
     @Environment(\.managedObjectContext) var moc
     
@@ -63,7 +64,7 @@ struct InitiativeView: View {
                             .foregroundColor(Color("CorePurple"))
                             .font(.title)
                     }.sheet(isPresented: $showModal) {
-                        AddCreatureView(modalType: self.modalType, showModal: self.$showModal, creature: self.modalType == "new" ? nil : self.alertContent)
+                        AddCreatureView(modalType: self.modalType, sender: "initiative", showModal: self.$showModal, creature: self.modalType == "new" ? nil : self.alertContent)
                             .environment(\.managedObjectContext, self.moc)
                     }
                 }.background(Color("MainBackground"))

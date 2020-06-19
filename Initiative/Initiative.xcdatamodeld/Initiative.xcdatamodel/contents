@@ -4,6 +4,7 @@
         <attribute name="creatureID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="currentHP" optional="YES" attributeType="String"/>
         <attribute name="initiative" optional="YES" attributeType="String"/>
+        <attribute name="isLive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="maxHP" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
@@ -28,8 +29,9 @@
         <relationship name="creatures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Creature" inverseName="parties" inverseEntity="Creature"/>
         <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="parties" inverseEntity="Encounter"/>
     </entity>
+    <fetchRequest name="FetchRequest" entity="Creature" predicateString="isLive == true"/>
     <elements>
-        <element name="Creature" positionX="-304.31640625" positionY="-309.04296875" width="128" height="178"/>
+        <element name="Creature" positionX="-304.31640625" positionY="-309.04296875" width="128" height="193"/>
         <element name="CreatureGroup" positionX="-100.2421875" positionY="-489.63671875" width="128" height="103"/>
         <element name="Encounter" positionX="-56.75390625" positionY="-283.6015625" width="128" height="103"/>
         <element name="Party" positionX="135.7421875" positionY="-219.1015625" width="128" height="88"/>

@@ -34,7 +34,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-//            AddCreatureView()
+            EncountersView()
                 Text("Encounter")
                 .tabItem {
                     VStack {

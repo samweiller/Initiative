@@ -12,6 +12,7 @@ import Introspect
 
 struct AddCreatureView: View {
     var modalType: String
+    var sender: String
     @Binding var showModal: Bool
     var creature: Creature? = nil
     
@@ -122,6 +123,9 @@ struct AddCreatureView: View {
                             }
                             creatureObject.initiative = self.initiativeValue
                             
+                            // Sets creature to "Live" if created in Initiative view
+                            creatureObject.isLive = self.sender == "initiative"
+                            
                             try? self.moc.save()
                             self.showModal = false
                         }) {
@@ -149,6 +153,6 @@ struct AddCreatureView: View {
 
 struct AddCreatureView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCreatureView(modalType: "new", showModal: .constant(true))
+        AddCreatureView(modalType: "new", sender: "initiative", showModal: .constant(true))
     }
 }
