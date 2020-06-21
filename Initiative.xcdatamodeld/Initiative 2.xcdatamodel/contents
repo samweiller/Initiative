@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Creature" representedClassName="Creature" syncable="YES" codeGenerationType="class">
+        <attribute name="creatureID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="currentHP" optional="YES" attributeType="String"/>
+        <attribute name="initiative" optional="YES" attributeType="String"/>
+        <attribute name="isLive" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="maxHP" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="creatureGroups" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CreatureGroup" inverseName="creatures" inverseEntity="CreatureGroup"/>
+        <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="creatures" inverseEntity="Encounter"/>
+        <relationship name="parties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Party" inverseName="creatures" inverseEntity="Party"/>
+    </entity>
+    <entity name="CreatureGroup" representedClassName="CreatureGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="creatures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Creature" inverseName="creatureGroups" inverseEntity="Creature"/>
+        <relationship name="encounters" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Encounter" inverseName="creatureGroups" inverseEntity="Encounter"/>
+    </entity>
+    <entity name="Encounter" representedClassName="Encounter" syncable="YES" codeGenerationType="class">
+        <attribute name="encounterID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="creatureGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CreatureGroup" inverseName="encounters" inverseEntity="CreatureGroup"/>
+        <relationship name="creatures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Creature" inverseName="encounters" inverseEntity="Creature"/>
+        <relationship name="parties" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Party" inverseName="encounters" inverseEntity="Party"/>
+    </entity>
+    <entity name="Party" representedClassName="Party" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="partyID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="creatures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Creature" inverseName="parties" inverseEntity="Creature"/>
+        <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="parties" inverseEntity="Encounter"/>
+    </entity>
+    <elements>
+        <element name="Creature" positionX="-304.31640625" positionY="-309.04296875" width="128" height="193"/>
+        <element name="CreatureGroup" positionX="-100.2421875" positionY="-489.63671875" width="128" height="103"/>
+        <element name="Encounter" positionX="-56.75390625" positionY="-283.6015625" width="128" height="118"/>
+        <element name="Party" positionX="135.7421875" positionY="-219.1015625" width="128" height="103"/>
+    </elements>
+</model>

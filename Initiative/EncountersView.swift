@@ -7,8 +7,26 @@
 //
 
 import SwiftUI
+import CoreData
+import Foundation
 
 struct EncountersView: View {
+    init() {
+        // To remove only extra separators below the list:
+        UITableView.appearance().tableFooterView = UIView()
+
+        // To remove all separators including the actual ones:
+        UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().backgroundColor = .clear // tableview background
+        UITableViewCell.appearance().backgroundColor = .clear // cell background
+    }
+    
+    @FetchRequest(
+        entity: Encounter.entity(),
+        sortDescriptors: []
+    ) var encounters: FetchedResults<Encounter>
+    @Environment(\.managedObjectContext) var moc
+    
     @State private var showModal = false
     @State private var modalType = "" // new/edit
 

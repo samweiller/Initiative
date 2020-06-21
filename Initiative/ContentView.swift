@@ -13,7 +13,7 @@ struct ContentView: View {
  
     var body: some View {
         TabView(selection: $selection){
-            Text("Second View")
+            PartiesView()
             .tabItem {
                 VStack {
                     Image(systemName: "person.3.fill")
@@ -35,7 +35,6 @@ struct ContentView: View {
                 }
                 .tag(1)
             EncountersView()
-                Text("Encounter")
                 .tabItem {
                     VStack {
                         Image(systemName: "shield.fill")

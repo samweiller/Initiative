@@ -17,17 +17,14 @@ struct InitiativeView: View {
 
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
-        
         UITableView.appearance().backgroundColor = .clear // tableview background
         UITableViewCell.appearance().backgroundColor = .clear // cell background
-        
-//        self.sortedCreatures = sortByInitiative(creatures: self.creatures)
     }
     
     @FetchRequest(
         entity: Creature.entity(),
         sortDescriptors: [],
-        predicate: NSPredicate(format: "isLive == %@", true)
+        predicate: NSPredicate(format: "isLive == %@", NSNumber(value: true))
     ) var creatures: FetchedResults<Creature>
     @Environment(\.managedObjectContext) var moc
     

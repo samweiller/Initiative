@@ -20,6 +20,16 @@ struct ViewTitle: ViewModifier {
     }
 }
 
+struct SmallerTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Bold", size: 24))
+            .foregroundColor(Color("Text Primary"))
+            .padding()
+            .background(Color("MainBackground"))
+    }
+}
+
 struct TabViewLabel: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -183,6 +193,12 @@ struct ActionIconStyle: ViewModifier {
 extension View {
     func viewTitleStyle() -> some View {
         self.modifier(ViewTitle())
+    }
+}
+
+extension View {
+    func smallerTitleStyle() -> some View {
+        self.modifier(SmallerTitle())
     }
 }
 
