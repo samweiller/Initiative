@@ -10,7 +10,7 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="creatureGroups" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CreatureGroup" inverseName="creatures" inverseEntity="CreatureGroup"/>
         <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="creatures" inverseEntity="Encounter"/>
-        <relationship name="parties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Party" inverseName="creatures" inverseEntity="Party"/>
+        <relationship name="party" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Party" inverseName="creatures" inverseEntity="Party"/>
     </entity>
     <entity name="CreatureGroup" representedClassName="CreatureGroup" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -28,7 +28,7 @@
     <entity name="Party" representedClassName="Party" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="partyID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="creatures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Creature" inverseName="parties" inverseEntity="Creature"/>
+        <relationship name="creatures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Creature" inverseName="party" inverseEntity="Creature"/>
         <relationship name="encounters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Encounter" inverseName="parties" inverseEntity="Encounter"/>
     </entity>
     <elements>

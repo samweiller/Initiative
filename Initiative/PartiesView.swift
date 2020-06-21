@@ -24,6 +24,7 @@ struct PartiesView: View {
         sortDescriptors: []
     ) var parties: FetchedResults<Party>
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var showAlert = false // not needed for parties
     @State private var navIsActive = false
@@ -48,7 +49,7 @@ struct PartiesView: View {
                         }
                         
                         // Navigate to NEW party editor
-                        NavigationLink(destination: EditPartyView(showModal: .constant(true), party: self.newPartyObject), isActive: self.$navIsActive,
+                        NavigationLink(destination: EditPartyView(party: self.newPartyObject), isActive: self.$navIsActive,
                         label: { EmptyView() })
                     }.background(Color("MainBackground"))
                     
@@ -69,7 +70,10 @@ struct PartiesView: View {
                 }
             }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))
             .navigationBarTitle("")
-//            .navigationBarHidden(true)
+            .navigationBarHidden(true)
+                .onAppear{
+                    self.navIsActive = false
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }

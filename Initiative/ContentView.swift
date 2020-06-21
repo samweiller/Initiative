@@ -9,6 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    init() {
+           // To remove only extra separators below the list:
+           UITableView.appearance().tableFooterView = UIView()
+
+           // To remove all separators including the actual ones:
+           UITableView.appearance().separatorStyle = .none
+           UITableView.appearance().backgroundColor = .clear // tableview background
+           UITableViewCell.appearance().backgroundColor = .clear // cell background
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor(red: 0.5, green: 0.33, blue: 0.62, alpha: 1)
+        
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: UIColor.darkGray,
+            .font : UIFont(name:"CircularStd-Bold", size: 34)!]
+        UINavigationBar.appearance().titleTextAttributes = [
+            .font : UIFont(name:"CircularStd-Bold", size: 34)!]
+       }
+    
     @State private var selection = 1
  
     var body: some View {

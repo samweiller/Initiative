@@ -13,9 +13,8 @@ struct PartyCard: View {
     let party: Party
     
     var body: some View {
-        Button(action: {
+        ZStack {
             
-        }) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(party.name ?? "Unknown").cardNameStyle()
@@ -24,12 +23,16 @@ struct PartyCard: View {
                 
                 Spacer()
                 Image(systemName: "chevron.right")
+                .foregroundColor(Color("CorePurple"))
             }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .padding([.vertical], 10)
-            .background(Color("Card Background"))
-            .cornerRadius(8)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .padding([.vertical], 10)
+                .background(Color("Card Background"))
+                .cornerRadius(8)
+            NavigationLink(destination: EditPartyView(party: party)) {
+                EmptyView()
+            }.buttonStyle(PlainButtonStyle())
         }
     }
 }

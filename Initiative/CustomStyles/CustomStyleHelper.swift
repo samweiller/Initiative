@@ -140,6 +140,14 @@ struct CardTypeStyle: ViewModifier {
     }
 }
 
+struct NavBarStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("CircularStd-Book", size: 17))
+            .foregroundColor(Color("CorePurple"))
+    }
+}
+
 struct CardCurrentHPStyle: ViewModifier {
     var level: String
     
@@ -248,6 +256,13 @@ extension View {
 extension View {
     func cardTypeStyle() -> some View {
         self.modifier(CardTypeStyle())
+    }
+}
+
+
+extension View {
+    func navBarStyle() -> some View {
+        self.modifier(NavBarStyle())
     }
 }
 

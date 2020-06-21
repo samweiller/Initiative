@@ -15,6 +15,7 @@ struct AddCreatureView: View {
     var sender: String
     @Binding var showModal: Bool
     var creature: Creature? = nil
+    var party: Party? = nil
     
     @State var name: String = ""
     @State var maxHP: String = ""
@@ -122,6 +123,10 @@ struct AddCreatureView: View {
                                 creatureObject.currentHP = self.currentHP
                             }
                             creatureObject.initiative = self.initiativeValue
+                            
+                            if self.party != nil {
+                                creatureObject.party = self.party
+                            }
                             
                             // Sets creature to "Live" if created in Initiative view
                             creatureObject.isLive = self.sender == "initiative"
