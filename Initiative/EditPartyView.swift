@@ -45,6 +45,7 @@ struct EditPartyView: View {
     var btnAdd : some View {
         Button(action: {
             self.showModal.toggle()
+            
             self.modalType = "new"
         }) {
             HStack {
