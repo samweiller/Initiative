@@ -30,7 +30,7 @@ struct PartyCard: View {
                 .padding([.vertical], 10)
                 .background(Color("Card Background"))
                 .cornerRadius(8)
-            NavigationLink(destination: EditPartyView(party: party)) {
+            NavigationLink(destination: EditPartyView(inputParty: party)) {
                 EmptyView()
             }.buttonStyle(PlainButtonStyle())
         }

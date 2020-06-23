@@ -11,75 +11,84 @@ import Combine
 import Introspect
 
 struct EditPartyView: View {
-//    init() {
-//        UINavigationBar.appearance().backgroundColor = .yellow
-//    }
     
-    var party: Party
+    var inputParty: Party? = nil
     
-    
-//    @FetchRequest(
-//        entity: Creature.entity(),
-//        sortDescriptors: [],
-//        predicate:
-//    ) var partyCreatures: FetchedResults<Creature>
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State private var party = Party()
     @State private var showModal = false
     @State private var modalType = "new" // new/edit
-        
+    @State private var alertAge = "new" // new/edit
+    @State private var showNameAlert = false
+    
     // For CreatureCard
     @State private var showAlert = false
     @State private var alertContent: Creature = Creature()
     @State private var alertType = ""
     
-    var btnBack : some View { Button(action: {
-        self.presentationMode.wrappedValue.dismiss()
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
         }) {
             HStack {
                 Image(systemName: "chevron.left") // set image here
-                .aspectRatio(contentMode: .fit)
-                .foregroundColor(Color("CorePurple"))
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color("CorePurple"))
                 Text("Parties").navBarStyle()
+                
             }
         }
     }
-
-
+    
+    var btnAdd : some View {
+        Button(action: {
+            self.showModal.toggle()
+            self.modalType = "new"
+        }) {
+            HStack {
+                Image(systemName: "pencil")
+                .padding(.trailing)
+                .foregroundColor(Color("CorePurple"))
+                .font(.title)
+            }.sheet(isPresented: $showModal) {
+                AddCreatureView(modalType: self.modalType, sender: "party", showModal: self.$showModal, party: self.party)
+                    .environment(\.managedObjectContext, self.moc)
+            }
+        }
+    }
+    
     var body: some View {
         // Converts creatures to a Set bc Swift can't ForEach a linked entity
         let partyCreatures: [Creature] = {
             if let creatures = party.creatures as? Set<Creature> {
-            return Array(creatures)
-          }
-          return [Creature]()
+                return Array(creatures)
+            }
+            return [Creature]()
         }()
         
         return ZStack {
             VStack(alignment: .leading, spacing: 0) {
-//                HStack {
-//                    
-//                }
+                //                HStack {
+                //
+                //                }
                 HStack {
-                    Text(party.name ?? "Unknown")
-                    .viewTitleStyle()
+                    Text(party.name ?? "")
+                        .viewTitleStyle()
                     Spacer()
                     Button(action: {
                         self.showModal.toggle()
                         self.modalType = "new"
                     }) {
-                        Image(systemName: "ellipsis")
+                        Image(systemName: "pencil")
                             .padding(.trailing)
                             .foregroundColor(Color("CorePurple"))
                             .font(.title)
-                    }.sheet(isPresented: $showModal) {
-                        AddCreatureView(modalType: self.modalType, sender: "party", showModal: self.$showModal, party: self.party)
-                            .environment(\.managedObjectContext, self.moc)
                     }
                 }
-                Text("Members").formLabelStyle().padding([.horizontal])
-                Spacer()
+//                Text("Members").formLabelStyle().padding([.horizontal])
+//                Spacer()
                 List {
                     ForEach(partyCreatures, id: \.creatureID) { creature in
                         CreatureCard(
@@ -93,15 +102,26 @@ struct EditPartyView: View {
                     }
                 }
             }
+            if self.showAlert {
+                ZStack {
+                    Color("Alert Overlay")
+                    TextAlert(alertType: "Party", alertAge: self.alertAge, showAlert: self.$showNameAlert, createdParty: self.$party)
+                    .padding()
+                }.edgesIgnoringSafeArea(.all)
+            }
         }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: btnBack)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack, trailing: btnAdd)
         .background(Color("MainBackground").edgesIgnoringSafeArea(.all))
-        
-//        .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarTitle(Text(""), displayMode: .inline)
-
+        .onAppear{
+            if self.inputParty != nil {
+                self.party = self.inputParty!
+            }
+            
+        }
+        
     }
 }
 

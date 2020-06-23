@@ -27,7 +27,7 @@ struct PartiesView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var showAlert = false // not needed for parties
-    @State private var navIsActive = false
+//    @State private var navIsActive = false
     @State private var modalType = "" // not needed for parties
     @State var newPartyObject: Party = Party()
     
@@ -38,10 +38,7 @@ struct PartiesView: View {
                     HStack {
                         Text("Parties").multilineTextAlignment(.leading).viewTitleStyle()
                         Spacer()
-                        Button(action: {
-                            self.showAlert.toggle()
-                            self.modalType = "new"
-                        }) {
+                        NavigationLink(destination: EditPartyView()) {
                             Image(systemName: "plus")
                                 .padding(.trailing)
                                 .foregroundColor(Color("CorePurple"))
@@ -49,8 +46,8 @@ struct PartiesView: View {
                         }
                         
                         // Navigate to NEW party editor
-                        NavigationLink(destination: EditPartyView(party: self.newPartyObject), isActive: self.$navIsActive,
-                        label: { EmptyView() })
+//                        NavigationLink(destination: EditPartyView(), isActive: self.$navIsActive,
+//                        label: { EmptyView() })
                     }.background(Color("MainBackground"))
                     
                     List {
@@ -61,19 +58,13 @@ struct PartiesView: View {
                     
                     Spacer()
                 }
-                if self.showAlert {
-                    ZStack {
-                        Color("Alert Overlay")
-                        TextAlert(alertType: "Party", showAlert: self.$showAlert, navIsActive: self.$navIsActive, createdParty: self.$newPartyObject)
-                        .padding()
-                    }.edgesIgnoringSafeArea(.all)
-                }
+                
             }.background(Color("MainBackground").edgesIgnoringSafeArea(.all))
             .navigationBarTitle("")
             .navigationBarHidden(true)
-                .onAppear{
-                    self.navIsActive = false
-            }
+//                .onAppear{
+//                    self.navIsActive = false
+//            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }

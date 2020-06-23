@@ -1,5 +1,5 @@
 //
-//  PopupAlert.swift
+//  TextAlert.swift
 //  Initiative
 //
 //  Created by Sam Weiller on 5/15/20.
@@ -11,13 +11,15 @@ import Introspect
 
 struct TextAlert: View {
     var alertType: String // Party/Encounter
+    var alertAge: String // new/edit
     
     @State var value: String = ""
     @Binding var showAlert: Bool
-    @Binding var navIsActive: Bool
+//    @Binding var navIsActive: Bool
     @Binding var createdParty: Party
     
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
@@ -30,9 +32,11 @@ struct TextAlert: View {
             
             HStack {
                 Button(action: {
-                    print("canceling")
                     withAnimation(.easeInOut(duration: 0.25)) {
                         self.showAlert = false
+                        if self.alertAge == "new" {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                     }
                 }) {
                     Image(systemName: "xmark")
@@ -58,7 +62,7 @@ struct TextAlert: View {
                         }
                         try? self.moc.save()
                     }
-                    self.navIsActive = true
+//                    self.navIsActive = true
                     withAnimation(.easeInOut(duration: 0.25)) {
                         self.showAlert = false
                     }
